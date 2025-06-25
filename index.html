@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>To-Do List</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body class="bg-gradient-to-br from-violet-900 via-purple-900 to-indigo-900 min-h-screen relative overflow-x-hidden">
+    <!-- 배경 장식 요소들 -->
+    <div class="absolute inset-0 overflow-hidden pointer-events-none">
+        <div class="absolute -top-40 -right-40 w-80 h-80 bg-purple-500 rounded-full mix-blend-multiply filter blur-xl opacity-20 animate-float"></div>
+        <div class="absolute -bottom-40 -left-40 w-80 h-80 bg-indigo-500 rounded-full mix-blend-multiply filter blur-xl opacity-20 animate-float" style="animation-delay: -2s;"></div>
+        <div class="absolute top-40 left-40 w-60 h-60 bg-pink-500 rounded-full mix-blend-multiply filter blur-xl opacity-20 animate-float" style="animation-delay: -4s;"></div>
+    </div>
+
+    <div class="container mx-auto px-4 py-12 relative z-10">
+        <!-- 헤더 -->
+        <div class="text-center mb-12">
+            <div class="inline-flex items-center justify-center w-20 h-20 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full mb-6 shadow-2xl">
+                <svg class="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v10a2 2 0 002 2h8a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"></path>
+                </svg>
+            </div>
+            <h1 class="text-5xl font-bold bg-gradient-to-r from-white to-purple-200 bg-clip-text text-transparent mb-3">
+                To-Do List
+            </h1>
+            <p class="text-purple-200 text-lg font-medium">오늘 해야 할 일들을 정리해보세요 ✨</p>
+        </div>
+
+        <!-- 입력 폼 -->
+        <div class="max-w-3xl mx-auto glass bg-white/10 rounded-2xl shadow-2xl p-8 mb-8 border border-white/20">
+            <!-- 날짜 선택기 -->
+            <div class="flex items-center justify-center mb-6">
+                <div class="glass bg-white/10 rounded-full px-6 py-3 border border-white/20 flex items-center gap-6">
+                    <button class="prev-day-btn text-purple-200 hover:text-white transition-colors duration-300 transform hover:scale-110">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+                        </svg>
+                    </button>
+                    
+                    <div class="text-center">
+                        <div class="text-white font-bold text-xl current-date">2024년 1월 15일</div>
+                        <div class="text-purple-200 text-sm font-medium current-day">월요일</div>
+                    </div>
+                    
+                    <button class="next-day-btn text-purple-200 hover:text-white transition-colors duration-300 transform hover:scale-110">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                        </svg>
+                    </button>
+                </div>
+                
+                <!-- 달력 아이콘 -->
+                <button class="calendar-btn ml-4 p-2 text-purple-200 hover:text-white transition-colors duration-300 transform hover:scale-110">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+                    </svg>
+                </button>
+                
+                <!-- 오늘 버튼 -->
+                <button class="today-btn ml-2 px-4 py-2 bg-gradient-to-r from-purple-500/20 to-pink-500/20 text-purple-200 rounded-full border border-purple-500/30 hover:from-purple-500/30 hover:to-pink-500/30 transition-all duration-300 text-sm font-medium">
+                    오늘
+                </button>
+            </div>
+
+            <!-- 미니 캘린더 -->
+            <div class="max-w-xs mx-auto mb-6">
+                <div class="glass bg-white/10 rounded-xl p-4 border border-white/20">
+                    <div class="text-center mb-3">
+                        <h4 class="text-white font-semibold text-sm mini-calendar-month-year">2024년 1월</h4>
+                    </div>
+                    
+                    <!-- 요일 헤더 -->
+                    <div class="grid grid-cols-7 gap-1 mb-2">
+                        <div class="text-center text-purple-200 text-xs font-medium py-1">일</div>
+                        <div class="text-center text-purple-200 text-xs font-medium py-1">월</div>
+                        <div class="text-center text-purple-200 text-xs font-medium py-1">화</div>
+                        <div class="text-center text-purple-200 text-xs font-medium py-1">수</div>
+                        <div class="text-center text-purple-200 text-xs font-medium py-1">목</div>
+                        <div class="text-center text-purple-200 text-xs font-medium py-1">금</div>
+                        <div class="text-center text-purple-200 text-xs font-medium py-1">토</div>
+                    </div>
+                    
+                    <!-- 날짜 그리드 -->
+                    <div id="miniCalendarDays" class="grid grid-cols-7 gap-1">
+                        <!-- JavaScript로 동적 생성 -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- 달력 모달 -->
+            <div id="calendarModal" class="fixed inset-0 bg-black bg-opacity-80 hidden z-50 flex items-center justify-center">
+                <div class="bg-gray-900 rounded-2xl shadow-2xl p-6 border border-purple-500/30 max-w-sm w-full mx-4">
+                    <div class="flex justify-between items-center mb-4">
+                        <h3 class="text-white font-bold text-lg">날짜 선택</h3>
+                        <button class="close-calendar-btn text-purple-200 hover:text-white transition-colors duration-300">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                            </svg>
+                        </button>
+                    </div>
+                    
+                    <div class="calendar-container">
+                        <div class="flex justify-between items-center mb-4">
+                            <button class="prev-month-btn text-purple-200 hover:text-white transition-colors duration-300">
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+                                </svg>
+                            </button>
+                            <h4 class="text-white font-semibold current-month-year">2024년 1월</h4>
+                            <button class="next-month-btn text-purple-200 hover:text-white transition-colors duration-300">
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                                </svg>
+                            </button>
+                        </div>
+                        
+                        <div class="calendar-grid mb-4">
+                            <!-- 요일 헤더 -->
+                            <div class="grid grid-cols-7 gap-1 mb-2">
+                                <div class="text-center text-purple-200 text-sm font-medium py-2">일</div>
+                                <div class="text-center text-purple-200 text-sm font-medium py-2">월</div>
+                                <div class="text-center text-purple-200 text-sm font-medium py-2">화</div>
+                                <div class="text-center text-purple-200 text-sm font-medium py-2">수</div>
+                                <div class="text-center text-purple-200 text-sm font-medium py-2">목</div>
+                                <div class="text-center text-purple-200 text-sm font-medium py-2">금</div>
+                                <div class="text-center text-purple-200 text-sm font-medium py-2">토</div>
+                            </div>
+                            
+                            <!-- 날짜 그리드 -->
+                            <div id="calendarDays" class="grid grid-cols-7 gap-1">
+                                <!-- JavaScript로 동적 생성 -->
+                            </div>
+                        </div>
+                        
+                        <div class="flex justify-end">
+                            <button class="select-date-btn px-4 py-2 bg-gradient-to-r from-purple-500 to-pink-500 text-white rounded-lg hover:from-purple-600 hover:to-pink-600 transition-all duration-300 font-medium">
+                                선택
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="flex gap-4">
+                <div class="flex-1 relative">
+                    <input 
+                        type="text" 
+                        placeholder="할 일을 입력하세요..." 
+                        class="todo-input w-full px-6 py-4 bg-white/20 backdrop-blur-sm border border-white/30 rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-400 focus:border-transparent text-white placeholder-purple-200 font-medium transition-all duration-300"
+                    >
+                    <div class="absolute inset-0 rounded-xl bg-gradient-to-r from-purple-500/20 to-pink-500/20 opacity-0 hover:opacity-100 transition-opacity duration-300 pointer-events-none"></div>
+                </div>
+                <button class="add-todo-btn px-8 py-4 bg-gradient-to-r from-purple-500 to-pink-500 text-white rounded-xl hover:from-purple-600 hover:to-pink-600 transition-all duration-300 font-semibold shadow-lg hover:shadow-xl transform hover:scale-105 active:scale-95">
+                    <span class="flex items-center gap-2">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
+                        </svg>
+                        추가
+                    </span>
+                </button>
+            </div>
+        </div>
+
+        <!-- 할 일 목록 -->
+        <div class="max-w-3xl mx-auto">
+            <!-- 할 일 카운터 -->
+            <div class="flex justify-between items-center mb-6">
+                <div class="todo-counter glass bg-white/10 rounded-full px-6 py-3 border border-white/20">
+                    <span class="text-purple-200 font-medium">총 <span class="font-bold text-white">0</span>개의 할 일</span>
+                </div>
+                <button class="delete-completed-btn text-red-300 hover:text-red-200 text-sm font-medium glass bg-red-500/10 rounded-full px-4 py-2 border border-red-500/20 hover:bg-red-500/20 transition-all duration-300">
+                    완료된 일 지우기
+                </button>
+            </div>
+
+            <!-- 할 일 아이템들 -->
+            <div class="todo-list-container space-y-4">
+                <!-- 동적으로 생성될 할 일 목록이 여기에 표시됩니다 -->
+            </div>
+
+            <!-- 빈 상태 (할 일이 없을 때) -->
+            <div class="hidden glass bg-white/10 rounded-2xl shadow-2xl p-12 text-center border border-white/20">
+                <div class="w-24 h-24 bg-gradient-to-r from-purple-500/20 to-pink-500/20 rounded-full flex items-center justify-center mx-auto mb-6 animate-pulse-slow">
+                    <svg class="w-12 h-12 text-purple-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v10a2 2 0 002 2h8a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"></path>
+                    </svg>
+                </div>
+                <h3 class="text-2xl font-semibold text-white mb-3">할 일이 없습니다</h3>
+                <p class="text-purple-200 text-lg">새로운 할 일을 추가해보세요! 🚀</p>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
