@@ -32,8 +32,16 @@
         <!-- 입력 폼 -->
         <div class="max-w-3xl mx-auto glass bg-white/10 rounded-2xl shadow-2xl p-8 mb-8 border border-white/20">
             <!-- 날짜 선택기 -->
-            <div class="flex items-center justify-center mb-6">
-                <div class="glass bg-white/10 rounded-full px-6 py-3 border border-white/20 flex items-center gap-6">
+            <div class="flex items-center justify-center gap-4 mb-6">
+                <!-- 달력 아이콘 -->
+                <button class="calendar-btn p-3 text-purple-200 hover:text-white transition-colors duration-300 transform hover:scale-110 glass bg-white/10 rounded-xl border border-white/20 shadow-lg">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+                    </svg>
+                </button>
+
+                <!-- 날짜 네비게이션 박스 -->
+                <div class="glass bg-white/10 rounded-2xl px-8 py-4 border border-white/20 flex items-center gap-6 shadow-xl">
                     <button class="prev-day-btn text-purple-200 hover:text-white transition-colors duration-300 transform hover:scale-110">
                         <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
@@ -52,35 +60,28 @@
                     </button>
                 </div>
                 
-                <!-- 달력 아이콘 -->
-                <button class="calendar-btn ml-4 p-2 text-purple-200 hover:text-white transition-colors duration-300 transform hover:scale-110">
-                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
-                    </svg>
-                </button>
-                
                 <!-- 오늘 버튼 -->
-                <button class="today-btn ml-2 px-4 py-2 bg-gradient-to-r from-purple-500/20 to-pink-500/20 text-purple-200 rounded-full border border-purple-500/30 hover:from-purple-500/30 hover:to-pink-500/30 transition-all duration-300 text-sm font-medium">
+                <button class="today-btn px-6 py-3 bg-gradient-to-r from-purple-500/20 to-pink-500/20 text-purple-200 rounded-xl border border-purple-500/30 hover:from-purple-500/30 hover:to-pink-500/30 transition-all duration-300 text-sm font-medium shadow-lg hover:shadow-xl">
                     오늘
                 </button>
             </div>
 
             <!-- 미니 캘린더 -->
-            <div class="max-w-xs mx-auto mb-6">
-                <div class="glass bg-white/10 rounded-xl p-4 border border-white/20">
-                    <div class="text-center mb-3">
-                        <h4 class="text-white font-semibold text-sm mini-calendar-month-year">2024년 1월</h4>
+            <div class="max-w-sm mx-auto mb-6">
+                <div class="glass bg-white/10 rounded-2xl p-6 border border-white/20 shadow-xl">
+                    <div class="text-center mb-4">
+                        <h4 class="text-white font-semibold text-lg mini-calendar-month-year">2024년 1월</h4>
                     </div>
                     
                     <!-- 요일 헤더 -->
-                    <div class="grid grid-cols-7 gap-1 mb-2">
-                        <div class="text-center text-purple-200 text-xs font-medium py-1">일</div>
-                        <div class="text-center text-purple-200 text-xs font-medium py-1">월</div>
-                        <div class="text-center text-purple-200 text-xs font-medium py-1">화</div>
-                        <div class="text-center text-purple-200 text-xs font-medium py-1">수</div>
-                        <div class="text-center text-purple-200 text-xs font-medium py-1">목</div>
-                        <div class="text-center text-purple-200 text-xs font-medium py-1">금</div>
-                        <div class="text-center text-purple-200 text-xs font-medium py-1">토</div>
+                    <div class="grid grid-cols-7 gap-1 mb-3">
+                        <div class="text-center text-purple-200 text-sm font-medium py-2">일</div>
+                        <div class="text-center text-purple-200 text-sm font-medium py-2">월</div>
+                        <div class="text-center text-purple-200 text-sm font-medium py-2">화</div>
+                        <div class="text-center text-purple-200 text-sm font-medium py-2">수</div>
+                        <div class="text-center text-purple-200 text-sm font-medium py-2">목</div>
+                        <div class="text-center text-purple-200 text-sm font-medium py-2">금</div>
+                        <div class="text-center text-purple-200 text-sm font-medium py-2">토</div>
                     </div>
                     
                     <!-- 날짜 그리드 -->

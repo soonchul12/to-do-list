@@ -124,26 +124,50 @@ function renderCalendar() {
         return date.getMonth() === month;
     };
     
+    // 특정 날짜의 할 일 개수 가져오기
+    const getTodoCount = (date) => {
+        const todos = getTodosFromStorage(date);
+        return todos.length;
+    };
+    
     // 6주 (42일) 렌더링
     for (let i = 0; i < 42; i++) {
         const currentDate = new Date(startDate);
         currentDate.setDate(startDate.getDate() + i);
         
         const dayElement = document.createElement('div');
-        dayElement.className = 'text-center py-2 cursor-pointer rounded-lg transition-all duration-200 font-medium';
+        dayElement.className = 'text-center py-2 cursor-pointer rounded-lg text-sm font-medium transition-all duration-200 relative';
         
         // 날짜 텍스트
         dayElement.textContent = currentDate.getDate();
         
+        // 할 일 개수 가져오기
+        const todoCount = getTodoCount(currentDate);
+        
         // 스타일 적용
-        if (isToday(currentDate)) {
-            dayElement.classList.add('bg-gradient-to-r', 'from-purple-500', 'to-pink-500', 'text-white', 'font-bold', 'shadow-lg');
+        if (isToday(currentDate) && isSelected(currentDate)) {
+            // 오늘이면서 선택된 날짜 (오늘)
+            dayElement.classList.add('bg-gradient-to-r', 'from-purple-500', 'to-pink-500', 'text-white', 'font-bold', 'ring-2', 'ring-white');
+        } else if (isToday(currentDate)) {
+            // 오늘 날짜
+            dayElement.classList.add('bg-gradient-to-r', 'from-purple-500', 'to-pink-500', 'text-white', 'font-bold');
         } else if (isSelected(currentDate)) {
-            dayElement.classList.add('bg-purple-600', 'text-white', 'font-semibold', 'shadow-md');
+            // 선택된 날짜
+            dayElement.classList.add('bg-purple-600', 'text-white', 'font-semibold', 'ring-2', 'ring-purple-300');
         } else if (isCurrentMonth(currentDate)) {
-            dayElement.classList.add('text-white', 'hover:bg-gray-700', 'hover:shadow-md');
+            // 현재 월의 날짜
+            dayElement.classList.add('text-white', 'hover:bg-white/20');
         } else {
-            dayElement.classList.add('text-gray-500', 'hover:bg-gray-700', 'hover:text-gray-300');
+            // 다른 월의 날짜
+            dayElement.classList.add('text-gray-500', 'hover:bg-white/10');
+        }
+        
+        // 할 일 개수 배지 추가
+        if (todoCount > 0) {
+            const badgeElement = document.createElement('div');
+            badgeElement.className = 'absolute -top-1 -right-1 w-5 h-5 bg-red-500 text-white text-xs rounded-full flex items-center justify-center font-bold';
+            badgeElement.textContent = todoCount > 9 ? '9+' : todoCount;
+            dayElement.appendChild(badgeElement);
         }
         
         // 클릭 이벤트
@@ -282,6 +306,7 @@ function addTodo(text) {
     saveTodosToStorage(currentSelectedDate, todos);
     displayTodos(currentSelectedDate);
     updateTodoCounter();
+    renderMiniCalendar(); // 미니 캘린더 업데이트
 }
 
 // 할 일 삭제 함수
@@ -291,6 +316,7 @@ function deleteTodo(index) {
     saveTodosToStorage(currentSelectedDate, todos);
     displayTodos(currentSelectedDate);
     updateTodoCounter();
+    renderMiniCalendar(); // 미니 캘린더 업데이트
 }
 
 // 할 일 완료 상태 토글 함수
@@ -300,6 +326,7 @@ function toggleTodo(index) {
     saveTodosToStorage(currentSelectedDate, todos);
     displayTodos(currentSelectedDate);
     updateTodoCounter();
+    renderMiniCalendar(); // 미니 캘린더 업데이트
 }
 
 // 완료된 할 일 모두 삭제 함수
@@ -309,6 +336,7 @@ function deleteCompletedTodos() {
     saveTodosToStorage(currentSelectedDate, filteredTodos);
     displayTodos(currentSelectedDate);
     updateTodoCounter();
+    renderMiniCalendar(); // 미니 캘린더 업데이트
 }
 
 // 할 일 카운터 업데이트 함수
@@ -388,16 +416,25 @@ function renderMiniCalendar() {
         return date.getMonth() === month;
     };
     
+    // 특정 날짜의 할 일 개수 가져오기
+    const getTodoCount = (date) => {
+        const todos = getTodosFromStorage(date);
+        return todos.length;
+    };
+    
     // 6주 (42일) 렌더링
     for (let i = 0; i < 42; i++) {
         const currentDate = new Date(startDate);
         currentDate.setDate(startDate.getDate() + i);
         
         const dayElement = document.createElement('div');
-        dayElement.className = 'text-center py-1 cursor-pointer rounded text-xs font-medium transition-all duration-200';
+        dayElement.className = 'text-center py-2 cursor-pointer rounded-lg text-sm font-medium transition-all duration-200 relative';
         
         // 날짜 텍스트
         dayElement.textContent = currentDate.getDate();
+        
+        // 할 일 개수 가져오기
+        const todoCount = getTodoCount(currentDate);
         
         // 스타일 적용
         if (isToday(currentDate) && isSelected(currentDate)) {
@@ -415,6 +452,14 @@ function renderMiniCalendar() {
         } else {
             // 다른 월의 날짜
             dayElement.classList.add('text-gray-500', 'hover:bg-white/10');
+        }
+        
+        // 할 일 개수 배지 추가
+        if (todoCount > 0) {
+            const badgeElement = document.createElement('div');
+            badgeElement.className = 'absolute -top-1 -right-1 w-5 h-5 bg-red-500 text-white text-xs rounded-full flex items-center justify-center font-bold';
+            badgeElement.textContent = todoCount > 9 ? '9+' : todoCount;
+            dayElement.appendChild(badgeElement);
         }
         
         // 클릭 이벤트
